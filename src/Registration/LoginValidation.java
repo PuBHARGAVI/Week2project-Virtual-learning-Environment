@@ -12,6 +12,7 @@ public boolean teacherValidation(String email, String pass){
 	}
 	
 	public boolean studentValidation(String email, String password) {
+		
 		SignupValidation obj = new SignupValidation();
 		if(obj.userdetails.containsKey(email) && password.equals(obj.userdetails.get(email))) {
 			System.out.println();
@@ -19,6 +20,8 @@ public boolean teacherValidation(String email, String pass){
 		}return false;
 	}
 public static void main(String[] args) {
+	char ch;
+	while(true) {
 	Scanner sc=new Scanner(System.in);
 	System.out.println("enter your email");
 	String email=sc.nextLine();
@@ -55,10 +58,16 @@ public static void main(String[] args) {
 		boolean output=signupobj.checkUserDetails(email, password, confirmpassword);
 		if(output) {
 			System.out.println("Thank you for Registering");
-		}
+			}
 		else {
 			System.out.println("enter correct Details");
 		}
+	}
+	System.out.println("Do you want to login again? Y/N ");
+	char c1=sc.next().charAt(0);
+	if(c1=='N') {
+		break;
+	}
 	}
 }
 }

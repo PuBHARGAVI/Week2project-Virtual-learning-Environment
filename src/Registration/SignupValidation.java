@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class SignupValidation {
 static Map<String, String> userdetails = new TreeMap<String, String>(); 
-Set<String> emailset = new TreeSet<String>();
+static Set<String> emailset = new TreeSet<String>();
 String email,password,confirmpassword;
 public boolean checkUserDetails(String email, String password, String confirmpassword) {
 			if(validEmail(email)&&validPassword(password,confirmpassword)) {
@@ -16,6 +16,9 @@ public boolean checkUserDetails(String email, String password, String confirmpas
 					System.out.println("Hi");
 					userdetails.put(email, password);
 					emailset.add(email);
+					for(String var:emailset) {
+						System.out.println(var);
+					}
 			    	return true;
 			    }
 				return false;
