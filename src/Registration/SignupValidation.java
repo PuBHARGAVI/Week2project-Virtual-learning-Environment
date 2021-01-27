@@ -1,26 +1,32 @@
 package Registration;
 import Model.User;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
-
 public class SignupValidation {
-static Map<String, String> userdetails = new TreeMap<String, String>(); 
+public static Map<String, ArrayList> studentsdetails = new TreeMap<String, ArrayList>(); 
 static Set<String> emailset = new TreeSet<String>();
 String email,password,confirmpassword;
-public boolean checkUserDetails(String email, String password, String confirmpassword) {
+public boolean checkUserDetails(String email, String password, String confirmpassword,String Phonenumber,String name) {
 			if(validEmail(email)&&validPassword(password,confirmpassword)) {
 				if(!emailset.contains(email)) {
 					System.out.println("Hi");
-					userdetails.put(email, password);
+					ArrayList<String> list=new ArrayList<String>();
+					list.add(name);
+					list.add(Phonenumber);
+					studentsdetails.put(email, list);
 					emailset.add(email);
-					for(String var:emailset) {
-						System.out.println(var);
-					}
 			    	return true;
 			    }
+				else if(emailset.contains(email)) {
+					System.out.println("Email already Exists");
+					return false;
+				}
 				return false;
 			}
 			else
@@ -60,6 +66,7 @@ Pattern pat = Pattern.compile(Regex);
 if(email==null) 
    return false; 
 return pat.matcher(email).matches(); 
- }	
+ }
+
  }
 

@@ -11,7 +11,7 @@ public class User {
 	private	String password;
 	private int id;
 		//constructor
-	public User(int id,String email, String password) {
+	public User(String email, String password) {
 		this.email = email;
 		this.password = password;
 		this.id = id;
