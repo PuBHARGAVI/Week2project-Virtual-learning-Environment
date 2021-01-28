@@ -1,31 +1,24 @@
-package Registration;
+package businesslogic;
 
 import java.util.Map;
 import java.util.Scanner;
 
-import Model.User;
+import model.User;
 import Service.DeleteStudentDetails;
 import Service.UpdateStudentDetails;
 import Service.ViewStudentDetails;
+import Service.VirtualClass;
+import Service.Course.Course;
 public class LoginValidation {
 	Scanner sc=new Scanner(System.in);
-public boolean teacherValidation(String email, String pass){
-		
-		if(email.equals("admin@gmail.com")&& pass.equals("admin")) {
-			ViewStudentDetails view=new ViewStudentDetails();
-			view.viewdetails(email,'f');
-			return true;
-		}return false;
-		
-	}
 	
-	public boolean studentValidation(String email, String password) {
+	public boolean UserValidation(String email, String password) {
 		
 		SignupValidation obj = new SignupValidation();
-		if(obj.studentsdetails.containsKey(email) && password.equals(obj.studentsdetails.get(email))) {
-			System.out.println();
+		if(obj.studentsdetails.containsKey(email) && password.equals(obj.studentsdetails.get(email).get(2))) {
 			return true;
-		}return false;
+		}
+		return false;
 	}
 	public void registerfun() {
 		System.out.println("enter your name");
@@ -38,21 +31,27 @@ public boolean teacherValidation(String email, String pass){
 		String confirmpassword=sc.next();
 		System.out.println("Enter Phonenumber");
 		String phonenumber=sc.next();
+		System.out.println("Choose 1.Faculty 2.Student 1/2");
+		int opt=sc.nextInt();
+		String ch="s";
+		if(opt==1) {
+			ch="f";
+		}
 		SignupValidation signupobj=new SignupValidation();
-		boolean output=signupobj.checkUserDetails(email, password, confirmpassword,phonenumber,name);
+		boolean output=signupobj.checkUserDetails(email, password, confirmpassword,phonenumber,name,ch);
 		if(output) {
 			System.out.println("Thank you for Registering");
-			
-			}
+		}
 		else {
 			System.out.println("enter correct Details");
 		}
 	}
+	
 public static void main(String[] args) {
 	Scanner sc=new Scanner(System.in);
 	char ch;
 	while(true) {
-	System.out.println("Select the option 1.login 2.register 3.update 4.Delete 5.View 6.Exit 1/2/3/4/5/6");
+	System.out.println("Select the option 1.login 2.register 3.detailsupdate 4.Delete 5.Viewdetails 6.courses 7.virtualcalss 8.Exit 1/2/3/4/5/6/7/8");
 	int option=sc.nextInt();
 	if(option==1) {
 	System.out.println("enter your email");
@@ -64,12 +63,7 @@ public static void main(String[] args) {
 	User userobj=new User(email,password);
 	LoginValidation lv=new LoginValidation();
 	boolean out=false;
-	if(torst=='s') {
-		out=lv.studentValidation(email, password);
-	}
-	else {
-		out=lv.teacherValidation(email, password);
-	}
+	out=lv.UserValidation(email, password);
 	if(out==true) {
 		System.out.println("Welcome");
 	}
@@ -109,6 +103,33 @@ public static void main(String[] args) {
 		view.viewdetails(email,c);
 	}
 	else if(option==6) {
+		System.out.println("Enter your email");
+		String email=sc.next();
+		SignupValidation obj=new SignupValidation();
+		if(obj.studentsdetails.containsKey(email)) {
+		Course course=new Course();
+		course.displaycourse(email,obj.studentsdetails.get(email).get(3).toString());
+		}
+		else {
+			System.out.println("You are not registered first signup");
+		}
+	}
+	else if(option==7) {
+		System.out.println("Enter your email");
+		String email=sc.next();
+		System.out.println("choose 1.studentslist registered for virtual class 2.Register");
+		int opt=sc.nextInt();
+		VirtualClass vc=new VirtualClass();
+		if(opt==1) {
+			System.out.println("Enter course name");
+			String coursenam=sc.next();
+			vc.register(email, coursenam);
+			}
+		else {
+			vc.viewlist();
+		}
+		}
+	else if(option==8) {
 		System.out.println("You are logged out.Thank you."); 
 		break;
 	}

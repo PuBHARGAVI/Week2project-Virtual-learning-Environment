@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import Registration.SignupValidation;
+import businesslogic.SignupValidation;
 
 public class ViewStudentDetails {
 	public void viewdetails(String email,char c) {

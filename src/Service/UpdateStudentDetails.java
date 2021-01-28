@@ -3,7 +3,8 @@ package Service;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
-import Registration.SignupValidation;
+
+import businesslogic.SignupValidation;
 
 public class UpdateStudentDetails {
 Scanner sc=new Scanner(System.in);

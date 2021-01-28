@@ -3,7 +3,7 @@ package Service;
 import java.util.ArrayList;
 import java.util.Map;
 
-import Registration.SignupValidation;
+import businesslogic.SignupValidation;
 
 public class DeleteStudentDetails {
 	SignupValidation signupobj=new SignupValidation();

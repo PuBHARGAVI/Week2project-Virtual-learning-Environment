@@ -1,6 +1,4 @@
-package Registration;
-import Model.User;
-
+package businesslogic;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -8,17 +6,21 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
+
+import model.User;
 public class SignupValidation {
 public static Map<String, ArrayList> studentsdetails = new TreeMap<String, ArrayList>(); 
 static Set<String> emailset = new TreeSet<String>();
 String email,password,confirmpassword;
-public boolean checkUserDetails(String email, String password, String confirmpassword,String Phonenumber,String name) {
+public boolean checkUserDetails(String email, String password, String confirmpassword,String Phonenumber,String name,String ch) {
 			if(validEmail(email)&&validPassword(password,confirmpassword)) {
 				if(!emailset.contains(email)) {
 					System.out.println("Hi");
 					ArrayList<String> list=new ArrayList<String>();
 					list.add(name);
 					list.add(Phonenumber);
+					list.add(password);
+					list.add(ch);
 					studentsdetails.put(email, list);
 					emailset.add(email);
 			    	return true;
