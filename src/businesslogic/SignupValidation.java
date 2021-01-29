@@ -12,28 +12,36 @@ public class SignupValidation {
 public static Map<String, ArrayList> studentsdetails = new TreeMap<String, ArrayList>(); 
 static Set<String> emailset = new TreeSet<String>();
 String email,password,confirmpassword;
-public boolean checkUserDetails(String email, String password, String confirmpassword,String Phonenumber,String name,String ch) {
-			if(validEmail(email)&&validPassword(password,confirmpassword)) {
+LoginValidation lv=new LoginValidation();
+public boolean checkUserDetails(String email, String password, String confirmpassword,String Phonenumber,String name,String fac) {
+			if(validEmail(email)&&validPassword(password,confirmpassword)&&validPhone(Phonenumber)) {
+				System.out.println("correct");
 				if(!emailset.contains(email)) {
 					System.out.println("Hi");
 					ArrayList<String> list=new ArrayList<String>();
 					list.add(name);
 					list.add(Phonenumber);
 					list.add(password);
-					list.add(ch);
+					list.add(fac);
 					studentsdetails.put(email, list);
 					emailset.add(email);
 			    	return true;
 			    }
+				
 				else if(emailset.contains(email)) {
 					System.out.println("Email already Exists");
 					return false;
 				}
-				return false;
 			}
-			else
 				return false;
 	}
+//validating user login status
+public boolean Checkloginstatus(String email, String password) {
+	if(emailset.contains(email) && studentsdetails.get(email).get(2).toString().equals(password) && lv.mailemail.toString().equals("false") ) {
+		return true;
+	}
+	return false;
+}
 //validating Password
 private boolean validPassword(String password, String confirmpassword) {
 	if(password.equals(confirmpassword)==false)
@@ -55,6 +63,7 @@ private boolean validPassword(String password, String confirmpassword) {
 		    	return true;
 		    		}
 		   }
+	System.out.println("Enter correct password");
 	return false;
 		}
 		    
@@ -65,10 +74,18 @@ String Regex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" + 
                 "A-Z]{2,7}$"; 
 Pattern pat = Pattern.compile(Regex); 
-if(email==null) 
+if(email==null) {
+	System.out.println("enter valid email");
    return false; 
+}
 return pat.matcher(email).matches(); 
  }
-
+private boolean validPhone(String email) {
+	if(email.length()!=10) {
+		System.out.println("Enter correct phone number of length 10");
+		return false;
+	}
+	return true;
+}
  }
 
