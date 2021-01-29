@@ -13,6 +13,10 @@ public void updatedetails(String email,int option) {
 	SignupValidation signupobj=new SignupValidation();
 	Map<String, ArrayList> map1=signupobj.studentsdetails;
 	ArrayList<String> list=map1.get(email);
+	if(list==null) {
+		System.out.println("You are not registered");
+	}
+	else {
 	if(option==1) {
 		System.out.println("Enter new name");
 		String name=sc.next();
@@ -24,5 +28,6 @@ public void updatedetails(String email,int option) {
 		list.set(1,number);
 	}
 	}
+}
 }
 

@@ -32,6 +32,7 @@ public boolean checkUserDetails(String email, String password, String confirmpas
 					System.out.println("Email already Exists");
 					return false;
 				}
+				return false;
 			}
 				return false;
 	}

@@ -13,7 +13,7 @@ import controller.VirtualClass;
 import controller.Course.Course;
 public class LoginValidation {
 	Scanner sc=new Scanner(System.in);
-	static String mailemail="";
+	public static String mailemail="false";
 	static String email1="";
 	public boolean UserValidation(String email, String password,String status) {
 		
@@ -67,6 +67,7 @@ public static void main(String[] args) {
 	String password=sc.next();
 	System.out.println("enter whether your a faculty or student f/s");//s-student,f=faculty
 	char torst=sc.next().charAt(0);
+	if(mailemail=="true") {
 	User userobj=new User(email,password);
 	LoginValidation lv=new LoginValidation();
 	boolean out=false;
@@ -83,6 +84,10 @@ public static void main(String[] args) {
 		System.out.println("First Signup because you are not a user");
 		LoginValidation obj=new LoginValidation();
 		obj.registerfun();
+	}
+	}
+	else {
+		System.out.println("You are not registered");
 	}
 	}
 	else if(option==2) {
@@ -111,8 +116,12 @@ public static void main(String[] args) {
 		//to delete user details
 		if(mailemail.equals("true")){
 		DeleteStudentDetails delete=new DeleteStudentDetails();
-		delete.deletedetails(email1);
-		}
+		boolean res=delete.deletedetails(email1);
+		if(res==true) {
+			SignupValidation signupobj=new SignupValidation();
+			signupobj.emailset.remove(email1);
+			}
+			}
 		else {
 			System.out.println("You are not logged in");
 		}
@@ -143,7 +152,7 @@ public static void main(String[] args) {
 	else if(option==7) {
 		//to register for virtual classes and see the students registered
 		if(mailemail.equals("true")){
-		System.out.println("choose 1.studentslist registered for virtual class 2.Register");
+		System.out.println("choose 1.Register 2.studentslist registered for virtual class");
 		int opt=sc.nextInt();
 		VirtualClass vc=new VirtualClass();
 		if(opt==1) {
