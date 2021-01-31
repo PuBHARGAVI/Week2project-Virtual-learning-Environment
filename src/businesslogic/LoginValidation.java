@@ -32,11 +32,17 @@ public class LoginValidation {
 		String password=sc.next();
 		System.out.println("Reenter password");
 		String confirmpassword=sc.next();
+		System.out.println("Enter your id no");
+		int id=sc.nextInt();
 		System.out.println("Enter Phonenumber");
 		String phonenumber=sc.next();
 		System.out.println("Choose 1.Faculty 2.Student 1/2");
 		int opt=sc.nextInt();
 		String ch="s";
+		User userobj=new User();
+		userobj.setEmail(email);
+		userobj.setPassword(password);
+		userobj.setId(id);
 		if(opt==1) {
 			ch="f";
 		}
@@ -67,8 +73,13 @@ public static void main(String[] args) {
 	String password=sc.next();
 	System.out.println("enter whether your a faculty or student f/s");//s-student,f=faculty
 	char torst=sc.next().charAt(0);
+	System.out.println("Enter yout id no");
+	int id=sc.nextInt();
 	if(mailemail=="true") {
-	User userobj=new User(email,password);
+	User userobj=new User();
+	userobj.setEmail(email);
+	userobj.setPassword(password);
+	userobj.setId(id);
 	LoginValidation lv=new LoginValidation();
 	boolean out=false;
 	out=lv.UserValidation(email, password,mailemail);

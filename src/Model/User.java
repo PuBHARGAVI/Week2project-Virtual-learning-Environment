@@ -2,18 +2,13 @@ package model;
 
 public class User {
 	private String email;
+	private	String password;
+	private int id;
+	//constructor
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
-		this.id = id;
-	}
-	private	String password;
-	private int id;
-		//constructor
-	public User(String email, String password) {
-		this.email = email;
-		this.password = password;
 		this.id = id;
 	}
 	public String getEmail() {
